@@ -16,7 +16,7 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
-
+//register the user
     @PostMapping("/register")
     public RegisterResponse addUser(@RequestBody UserDTO userDTO){
         return userService.addUser(userDTO);
