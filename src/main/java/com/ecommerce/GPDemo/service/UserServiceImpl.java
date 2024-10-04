@@ -1,7 +1,8 @@
 package com.ecommerce.GPDemo.service;
 
-import com.ecommerce.GPDemo.Response.AuthenticationResponse;
-import com.ecommerce.GPDemo.Response.RegisterResponse;
+import com.ecommerce.GPDemo.mapper.UserMapper;
+import com.ecommerce.GPDemo.response.AuthenticationResponse;
+import com.ecommerce.GPDemo.response.RegisterResponse;
 import com.ecommerce.GPDemo.dto.UserDTO;
 import com.ecommerce.GPDemo.entity.*;
 import com.ecommerce.GPDemo.repo.TokenRepository;
@@ -13,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +23,8 @@ import java.util.Map;
 public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepo userRepo;
-    @Autowired
-    private ModelMapper modelMapper;
+//    @Autowired
+//    private ModelMapper modelMapper;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -63,15 +65,17 @@ public class UserServiceImpl implements UserService{
     }
     @Override
     public RegisterResponse addUser(UserDTO user) {
-
-        user.setRole(Role.VISITOR);
-        User savedUser=userRepo.save(modelMapper.map(user,User.class));
+        UserRole userRole=new UserRole(Role.VISITOR);
+        List<UserRole> userRoles = new ArrayList<>();
+        userRoles.add(userRole);
+        user.setRole(userRoles);
+        User savedUser=userRepo.save( UserMapper.INSTANCE.toEntity(user));
 
         return new RegisterResponse("Registered Successfully :)", savedUser.getEmail());
     }
 
     @Override
-    public AuthenticationResponse loginUser(login log) {
+    public AuthenticationResponse loginUser(Login log) {
 
         User user = userRepo.findByEmail(log.getEmail());
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(log.getEmail(),log.getPassword()));

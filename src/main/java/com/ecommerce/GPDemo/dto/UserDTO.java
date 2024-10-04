@@ -2,11 +2,14 @@ package com.ecommerce.GPDemo.dto;
 
 
 import com.ecommerce.GPDemo.entity.Role;
+import com.ecommerce.GPDemo.entity.UserRole;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -27,6 +30,11 @@ public class UserDTO {
     @NotEmpty
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private List<UserRole> role;
+
+    public UserDTO(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 }
