@@ -1,4 +1,4 @@
-package com.ecommerce.GPDemo.Response;
+package com.ecommerce.GPDemo.response;
 
 import lombok.*;
 
@@ -7,8 +7,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthenticationResponse {
+public class RegisterResponse {
     private  String message;
     private String email;
-    private String accessToken;
 }

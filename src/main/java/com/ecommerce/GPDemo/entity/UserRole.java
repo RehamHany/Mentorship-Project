@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "roles")
 @Setter
@@ -21,4 +23,11 @@ public class UserRole {
     @NotEmpty
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @ManyToMany(mappedBy = "userRoleList")
+    private List<User> users;
+
+    public UserRole(Role role) {
+        this.role = role;
+    }
 }

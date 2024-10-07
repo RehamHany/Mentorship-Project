@@ -1,4 +1,4 @@
-package com.ecommerce.GPDemo.Auth;
+package com.ecommerce.GPDemo.auth;
 
 
 

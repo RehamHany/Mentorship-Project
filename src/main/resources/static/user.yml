@@ -11,22 +11,41 @@ paths:
     post:
       tags:
         - user
-      summary: Create user
+      summary: Register user
       description: This can only be done by the logged in user.
-      operationId: createUser
+      operationId: RegisterUser
       requestBody:
         description: Created user object
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserDTO'
+            examples:
+              default:
+                value:
+                  name: "defaultUser"
+                  email: "defaultuser@example.com"
+                  password: "Default"
       responses:
-        default:
-          description: successful operation
+        '200':
+          description: RegisterResponse
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/RegisterResponse'
+              examples:
+                default:
+                  value:
+                    message: "defaultUser"
+                    email: "defaultuser@example.com"
+        '403':
+          description: User error
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    error: "User error"
   /login:
     post:
       tags:
@@ -34,32 +53,45 @@ paths:
       summary: Logs user into the system
       description: ''
       operationId: loginUser
-      parameters:
-        - name: username
-          in: query
-          description: The user name for login
-          required: false
-          schema:
-            type: string
-        - name: password
-          in: query
-          description: The password for login in clear text
-          required: false
-          schema:
-            type: string
+      requestBody:
+        description: login user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+            examples:
+              default:
+                value:
+                  email: "defaultuser@example.com"
+                  password: "Default"
       responses:
         '200':
-          description: successful operation
+          description: AuthenticationResponse
           content:
             application/json:
               schema:
-                type: string
-        '400':
+                $ref: '#/components/schemas/AuthenticationResponse'
+                examples:
+                  default:
+                     value:
+                      message: "defaultUser"
+                      email: "defaultuser@example.com"
+                      accessToken: "fxsaasgfdnhcnmccggmcgg"
+        '403':
           description: Invalid username/password supplied
 
 components:
   schemas:
-    User:
+    Login:
+      type: object
+      properties:
+        email:
+          type: string
+          example: john@email.com
+        password:
+          type: string
+          example: '12345'
+    UserDTO:
       type: object
       properties:
         id:
@@ -77,3 +109,25 @@ components:
           example: '12345'
       xml:
         name: user
+    AuthenticationResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: response
+        email:
+          type: string
+          example: theUser@gmail.com
+        accessToken:
+          type: string
+          example: fxsaasgfdnhcnmccggmcgg
+    RegisterResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: response
+        email:
+          type: string
+          example: theUser@gmail.com
+
