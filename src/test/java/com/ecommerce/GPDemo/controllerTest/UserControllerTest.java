@@ -1,13 +1,14 @@
 package com.ecommerce.GPDemo.controllerTest;
 
 import com.ecommerce.GPDemo.controller.UserController;
-import com.ecommerce.GPDemo.dto.UserDTO;
+
 import com.ecommerce.GPDemo.entity.Login;
 import com.ecommerce.GPDemo.entity.User;
 
 import com.ecommerce.GPDemo.response.AuthenticationResponse;
 import com.ecommerce.GPDemo.response.RegisterResponse;
 import com.ecommerce.GPDemo.service.UserService;
+import com.fruits.ecommerce.model.UserDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -19,7 +20,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @WebMvcTest(UserController.class)
-public class userController {
+public class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -43,7 +44,7 @@ public class userController {
         when(authService.addUser(any(UserDTO.class))).thenReturn(new RegisterResponse());
 
         mockMvc.perform(post("/api/v1/user/register")
-                        .contentType(MediaType.APPLICATION_JSON));
+                .contentType(MediaType.APPLICATION_JSON));
 
         verify(authService).addUser(any(UserDTO.class));
     }

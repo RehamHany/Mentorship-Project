@@ -1,6 +1,6 @@
 package com.ecommerce.GPDemo.mapper;
 
-import com.ecommerce.GPDemo.dto.UserDTO;
+import com.fruits.ecommerce.model.UserDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import com.ecommerce.GPDemo.entity.User;

@@ -1,6 +1,6 @@
 package com.ecommerce.GPDemo.serviceTest;
 
-import com.ecommerce.GPDemo.dto.UserDTO;
+
 import com.ecommerce.GPDemo.entity.User;
 import com.ecommerce.GPDemo.entity.Login;
 import com.ecommerce.GPDemo.repo.UserRepo;
@@ -10,6 +10,7 @@ import com.ecommerce.GPDemo.service.UserService;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.fruits.ecommerce.model.UserDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +25,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
-public class userService {
+public class UserServiceTest {
 
     @Mock
     private UserRepo userRepository;
