@@ -3,11 +3,12 @@ package com.ecommerce.GPDemo.service;
 import com.ecommerce.GPDemo.mapper.UserMapper;
 import com.ecommerce.GPDemo.response.AuthenticationResponse;
 import com.ecommerce.GPDemo.response.RegisterResponse;
-import com.ecommerce.GPDemo.dto.UserDTO;
+
 import com.ecommerce.GPDemo.entity.*;
 import com.ecommerce.GPDemo.repo.TokenRepository;
 import com.ecommerce.GPDemo.repo.UserRepo;
-import org.modelmapper.ModelMapper;
+
+import com.fruits.ecommerce.model.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,8 +24,6 @@ import java.util.Map;
 public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepo userRepo;
-//    @Autowired
-//    private ModelMapper modelMapper;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -68,8 +67,10 @@ public class UserServiceImpl implements UserService{
         UserRole userRole=new UserRole(Role.VISITOR);
         List<UserRole> userRoles = new ArrayList<>();
         userRoles.add(userRole);
-        user.setRole(userRoles);
-        User savedUser=userRepo.save( UserMapper.INSTANCE.toEntity(user));
+
+        User user1= UserMapper.INSTANCE.toEntity(user);
+        user1.setUserRoleList(userRoles);
+        User savedUser=userRepo.save(user1);
 
         return new RegisterResponse("Registered Successfully :)", savedUser.getEmail());
     }

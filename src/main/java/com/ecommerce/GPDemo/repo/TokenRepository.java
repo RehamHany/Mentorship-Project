@@ -13,6 +13,6 @@ public interface TokenRepository extends JpaRepository<Token, Integer> {
     select t from Token t inner join User u on t.user.id = u.id
     where t.user.id = :userId  
     """)
-    List<Token> findAllTokensByUser(@Param("userId") Integer userId);
+    List<Token> findAllTokensByUser(@Param("userId") Long userId);
     Token findByToken(String token);
 }
