@@ -1,8 +1,7 @@
 package com.panel.app.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,18 +21,6 @@ public class Customer {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "username")
-    @NotEmpty
-    private String username;
-
-    @Column(name = "email")
-    @NotEmpty
-    @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
-    private String email;
-
-    @Column(name = "password")
-    @NotEmpty
-    private String password;
 
 
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
@@ -49,11 +36,7 @@ public class Customer {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    public Customer(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
+
 
 
 }

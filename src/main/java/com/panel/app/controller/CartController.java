@@ -16,13 +16,13 @@ public class CartController implements CardApi {
     private CartService cartService;
 
     @Override
-    @PostMapping("/cards")
+    @PostMapping("/carts")
     public ResponseEntity<String> _addToCard(Long userId, Long productId) {
         return ResponseEntity.ok(cartService.addToCart(userId,productId));
     }
 
     @Override
-    @GetMapping("/cards")
+    @GetMapping("/carts")
     public ResponseEntity<CartDisplayResponse> _cardsGet(Long userId) {
         return ResponseEntity.ok(cartService.getCart(userId));
     }
