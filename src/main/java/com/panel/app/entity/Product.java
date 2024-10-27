@@ -39,8 +39,7 @@ public class Product {
     @NotEmpty
     private String description;
 
-    @ManyToMany(mappedBy = "products", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    private List<User> users;
+
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     private CartItem cart;

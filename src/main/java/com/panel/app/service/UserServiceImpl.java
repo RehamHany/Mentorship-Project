@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService{
         Customer savedCustom=customerRepo.save(customer);
 
 
-        return new RegisterResponse("success",savedCustom.getEmail());
+        return new RegisterResponse("success",savedUser.getEmail());
     }
 
 

@@ -44,13 +44,6 @@ public class User implements UserDetails {
     )
     private List<UserRole> userRoleList ;
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinTable(
-            name = "user_products",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Product> products;
 
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
